@@ -155,18 +155,19 @@
 	                        oids = "["+oids.join(", ")+"]";
 	                        guids = "["+guids.map(function(s) {return '"'+s+'"';}).join(", ")+"]";
 	                        
-	                        var METHODS = [
+	                        var METHODS = [/*
 	                            {name:'setVisibility',     args:[{name: "ids", value: oids}, {name: "visible", value:false}]},
 	                            {name:'setVisibility',     args:[{name: "types", value: '["IfcWallStandardCase"]'}, {name: "visible", value:false}]},
-	                            {name:'setSelectionState', args:[{name: "ids", value: oids}, {name: "selected", value:true}]},
-	                            {name:'getSelected', args:[], hasResult: true},
+	                            {name:'setSelectionState', args:[{name: "ids", value: oids}, {name: "selected", value:true}]},*/
+	                            {name:'getSelection', args:[], hasResult: true},/*
 	                            {name:'toId', args:[guids], hasResult: true},
 	                            {name:'toGuid', args:[oids], hasResult: true},
 	                            {name:'setColor', args:[{name: "ids", value: oids}, {name: "color", value:"{r:1, g:0, b:0, a:1}"}]},
 	                            {name:'viewFit', args:[{name: "ids", value: oids}, {name: "animate", value:500}]},
 	                            {name:'setCamera', args:[{name: "type", value: "'ortho'"}]},
 	                            {name:'getCamera', args:[], hasResult: true},
-	                            {name:'reset', args:[{name: "cameraPosition", value: true}]},
+	                            {name:'reset', args:[{name: "cameraPosition", value: true}]},*/
+	                            {name:'setTexture', args:[{name: "ids", value: oids}, {name: "texture", value:"'textures/Ir_0246.bmp'"}]}
 	                        ];
 	
 	                        var n = document.getElementById('apirefContainer');
