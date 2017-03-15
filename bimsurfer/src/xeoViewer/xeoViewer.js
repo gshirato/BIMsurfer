@@ -426,6 +426,8 @@ define([
         		object.visibility.visible = false;
         	}
 
+            object.material
+
             return object;
         };
 
@@ -795,6 +797,72 @@ define([
                 material.opacity = opacity;
                 object.modes.transparent = opacity < 1;
             }
+        };
+
+        /************
+         *** P2RV ***
+         ************/
+
+        /**
+         * Sets the texture of objects specified by IDs or IFC types.
+         *
+         * @param params
+         * @param params.ids IDs of objects to update.
+         * @param params.types IFC type of objects to update.
+         * @param params.texture Path to the texture file.
+         */
+        this.setTexture = function (params) {
+
+            params = params || {};
+
+            var ids = params.ids;
+            var types = params.types;
+
+            if (!ids && !types) {
+                console.error("Param expected: ids or types");
+                return;
+            }
+
+            ids = ids || [];
+            types = types || [];
+
+            var texture = params.texture;
+
+            if (!texture) {
+                console.error("Param expected: 'texture'");
+                return;
+            }
+
+            var objectId;
+            var object;
+            
+            for (i = 0, len = types.length; i < len; i++) {
+                var typedict = rfcTypes[types[i]] || {};
+                Object.keys(typedict).forEach(function (id) {
+                    var object = typedict[id];
+                    self._setObjectTexture(object, texture);
+                });
+            }
+
+            for (var i = 0, len = ids.length; i < len; i++) {
+
+                objectId = ids[i];
+                object = objects[objectId];
+
+                if (!object) {
+                    // No return on purpose to continue changing color of
+                    // other potentially valid object identifiers.
+                    console.error("Object not found: '" + objectId + "'");
+                } else {
+                    this._setObjectTexture(object, texture);
+                }
+            }
+        };
+
+        this._setObjectTexture = function (object, texture) {
+
+            var material = object.material;
+            material.diffuseMap = texture;
         };
 		
 		/**

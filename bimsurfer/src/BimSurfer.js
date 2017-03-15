@@ -317,6 +317,20 @@ define(deps, function (Notifier, Model, PreloadQuery, GeometryLoader, xeoViewer,
         this.setColor = function (params) {
             viewer.setColor(params);
         };
+
+        /************
+         *** P2RV ***
+         ************/
+
+        /**
+         * Sets color of objects specified by ids or entity type, e.g IfcWall.
+         **
+         * @param params
+         */
+        this.setTexture = function (params) {
+            console.log(window.location.pathname);
+            viewer.setTexture(params);
+        };
 		
 		/**
          * Sets opacity of objects specified by ids or entity type, e.g IfcWall.
